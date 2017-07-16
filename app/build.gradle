@@ -32,4 +32,6 @@ dependencies {
     compile rootProject.ext.dependencies["glide"]
     //图像转换：方法，颜色，模糊度等
     compile rootProject.ext.dependencies["glide-transformations"]
+    // 5.0 design 包下新控件
+    compile rootProject.ext.dependencies["design"]
 }

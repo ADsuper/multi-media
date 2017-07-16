@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">珞神~</string>
+
+    <string name="title_home">Home</string>
+    <string name="title_read">Read</string>
+    <string name="title_me">Me</string>
+
+    <string name="drawer_menu_1">前端</string>
+    <string name="drawer_menu_2">APP</string>
+    <string name="drawer_menu_3">瞎推荐</string>
+    <string name="drawer_menu_4">休息视频</string>
+    <string name="drawer_menu_5">拓展资源</string>
+    <string name="drawer_menu_6">主题切换</string>
+
+
+
 </resources>

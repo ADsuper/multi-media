@@ -13,7 +13,6 @@ import com.bumptech.glide.Glide;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import io.github.adsuper.multi_media.MainActivity;
 import io.github.adsuper.multi_media.R;
 import jp.wasabeef.glide.transformations.BlurTransformation;
 

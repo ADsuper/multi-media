@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_draw_client"
+        android:icon="@drawable/drawer_icon_client"
+        android:title="@string/drawer_menu_1"/>
+
+    <item
+        android:id="@+id/menu_draw_recommend"
+        android:icon="@drawable/drawer_icon_recommend"
+        android:title="@string/drawer_menu_2"/>
+
+    <item
+        android:id="@+id/menu_draw_app"
+        android:icon="@drawable/drawer_icon_app"
+        android:title="@string/drawer_menu_3"/>
+
+    <item
+        android:id="@+id/menu_draw_expandresource"
+        android:icon="@drawable/drawer_icon_resource"
+        android:title="@string/drawer_menu_4"/>
+    <item
+        android:id="@+id/menu_draw_video"
+        android:icon="@drawable/drawer_icon_video"
+        android:title="@string/drawer_menu_5"/>
+
+    <item
+        android:id="@+id/menu_draw_theme"
+        android:icon="@drawable/drawer_icon_theme"
+        android:title="@string/drawer_menu_6"/>
+</menu>
