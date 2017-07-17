@@ -5,6 +5,7 @@
     <color name="colorAccent">#607D8B</color>
 
     <color name="white">#FFFFFF</color>
+    <color name="red">#E62739</color>
 
     <color name="drawer_header_text">#757575</color>
 </resources>

@@ -5,6 +5,9 @@ import android.os.Bundle;
 
 import io.github.adsuper.multi_media.R;
 
+/**
+ * 编辑页面
+ */
 public class EditActivity extends AppCompatActivity {
 
     @Override

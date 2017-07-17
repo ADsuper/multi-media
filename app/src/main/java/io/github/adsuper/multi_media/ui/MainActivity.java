@@ -27,8 +27,8 @@ import io.github.adsuper.multi_media.fragment.MeFragment;
 import io.github.adsuper.multi_media.fragment.ReadFragment;
 
 public class MainActivity extends AppCompatActivity implements
-        BottomNavigationView.OnNavigationItemSelectedListener,
-        NavigationView.OnNavigationItemSelectedListener {
+        BottomNavigationView.OnNavigationItemSelectedListener
+         {
 
     //底部导航栏对应的三个页面
     private final int NAVIGATION_HOME = 0;

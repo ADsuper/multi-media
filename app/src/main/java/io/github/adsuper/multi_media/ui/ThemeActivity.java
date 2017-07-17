@@ -6,7 +6,7 @@ import android.os.Bundle;
 import io.github.adsuper.multi_media.R;
 
 /**
- * 主题详情页面
+ * 主题选择页面
  */
 public class ThemeActivity extends AppCompatActivity {
 

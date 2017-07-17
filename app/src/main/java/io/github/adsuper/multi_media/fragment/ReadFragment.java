@@ -11,7 +11,7 @@ import android.widget.TextView;
 /**
  * 作者：luoshen/rsf411613593@gmail.com
  * 时间：2017年07月17日
- * 说明：
+ * 说明：底部导航 read 对应的 fragment
  */
 
 public class ReadFragment extends Fragment {

@@ -5,6 +5,9 @@ import android.os.Bundle;
 
 import io.github.adsuper.multi_media.R;
 
+/**
+ * 搜索页面
+ */
 public class SearchActivity extends AppCompatActivity {
 
     @Override

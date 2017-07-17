@@ -11,17 +11,17 @@ import android.widget.TextView;
 /**
  * 作者：luoshen/rsf411613593@gmail.com
  * 时间：2017年07月17日
- * 说明：底部导航 me 对应的 fragment
+ * 说明：
  */
 
-public class MeFragment extends Fragment {
+public class HomeTab2Fragment extends Fragment {
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         TextView textView = new TextView(getActivity());
-        textView.setText("MeFragment");
+        textView.setText("HomeTab2Fragment");
         return textView;
     }
 }
