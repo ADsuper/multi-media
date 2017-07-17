@@ -1,10 +1,12 @@
 package io.github.adsuper.multi_media.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -18,11 +20,14 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.github.adsuper.multi_media.R;
 import io.github.adsuper.multi_media.adapter.MainViewPagerAdapter;
+import io.github.adsuper.multi_media.common.Constant;
 import io.github.adsuper.multi_media.fragment.HomeFragment;
 import io.github.adsuper.multi_media.fragment.MeFragment;
 import io.github.adsuper.multi_media.fragment.ReadFragment;
 
-public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener{
+public class MainActivity extends AppCompatActivity implements
+        BottomNavigationView.OnNavigationItemSelectedListener,
+        NavigationView.OnNavigationItemSelectedListener {
 
     //底部导航栏对应的三个页面
     private final int NAVIGATION_HOME = 0;
@@ -51,16 +56,19 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         initToolBar();
-        setBottomNavigationItemSelected();
+        initClickEvent();
         initAdapter();
 
     }
 
     /**
-     * 设置底部导航栏按钮点击监听
+     * 设置点击事件
      */
-    private void setBottomNavigationItemSelected() {
+    private void initClickEvent() {
+        //设置底部导航栏按钮点击监听
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
+        //侧滑菜单的 item 点击事件
+        navigationView.setNavigationItemSelectedListener(new DrawerLayoutItemSelectListener());
     }
 
     /**
@@ -143,5 +151,56 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         public void onPageScrollStateChanged(int state) {
 
         }
+    }
+
+    /**
+     * 侧滑菜单中的 条目点击事件
+     */
+    private class DrawerLayoutItemSelectListener implements NavigationView.OnNavigationItemSelectedListener {
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            int id = item.getItemId();
+            String categroy = Constant.CATEGORY_ALL;
+            switch (id) {
+                case R.id.menu_draw_client:
+                    categroy = Constant.CATEGORY_CLIENT;
+                    showCategoryInfo(categroy);
+                    break;
+                case R.id.menu_draw_recommend:
+                    categroy = Constant.CATEGROY_RECOMMEND;
+                    showCategoryInfo(categroy);
+                    break;
+                case R.id.menu_draw_app:
+                    categroy = Constant.CATEGORY_APP;
+                    showCategoryInfo(categroy);
+                    break;
+                case R.id.menu_draw_expandresource:
+                    categroy = Constant.CATEGORY_EXPANDRESOURCE;
+                    showCategoryInfo(categroy);
+                    break;
+                case R.id.menu_draw_video:
+                    categroy = Constant.CATEGORY_VIDEO;
+                    showCategoryInfo(categroy);
+                    break;
+                case R.id.menu_draw_theme:
+                    Intent intent = new Intent(MainActivity.this,ThemeActivity.class);
+                    startActivity(intent);
+                    break;
+            }
+            item.setCheckable(true);
+            drawerlayout.closeDrawer(GravityCompat.START);
+            return true;
+        }
+    }
+
+    /**
+     * 跳转到分类展示界面
+     *
+     * @param categroy
+     */
+    private void showCategoryInfo(String categroy) {
+        Intent intent = new Intent(this, OtherCategoryActivity.class);
+        intent.putExtra("categroy", categroy);
+        startActivity(intent);
     }
 }
