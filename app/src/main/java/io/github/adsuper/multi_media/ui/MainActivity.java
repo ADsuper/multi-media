@@ -11,6 +11,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 
 import java.util.ArrayList;
@@ -48,6 +49,8 @@ public class MainActivity extends AppCompatActivity implements
     DrawerLayout drawerlayout;
     //viewPager 数据源
     private List<Fragment> mList;
+    //toolbar 右侧 menu
+    private Menu mMenu;
 
 
     @Override
@@ -202,5 +205,34 @@ public class MainActivity extends AppCompatActivity implements
         Intent intent = new Intent(this, OtherCategoryActivity.class);
         intent.putExtra("categroy", categroy);
         startActivity(intent);
+    }
+
+    /**
+     * toolbar 右侧菜单项
+     * @param menu
+     * @return
+     */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.menu_main_toolbar,menu);
+        mMenu = menu;
+        return true;
+    }
+
+    /**
+     * toolbar 右侧菜单项 点击事件
+     * @param item
+     * @return
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.action_search) {
+            startActivity(new Intent(this, SearchActivity.class));
+        }
+        if (item.getItemId() == R.id.action_edit) {
+            startActivity(new Intent(this, EditActivity.class));
+        }
+        return true;
     }
 }

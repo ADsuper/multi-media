@@ -38,7 +38,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:background="?android:attr/windowBackground"
-            app:menu="@menu/bottom_navigationview"></android.support.design.widget.BottomNavigationView>
+            app:menu="@menu/menu_bottom_navigationview"></android.support.design.widget.BottomNavigationView>
 
     </LinearLayout>
 
@@ -50,7 +50,7 @@
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/drawer_header"
-        app:menu="@menu/drawer_menu">
+        app:menu="@menu/menu_drawer">
 
     </android.support.design.widget.NavigationView>
 </android.support.v4.widget.DrawerLayout>
