@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-apply plugin: 'android-apt'
+//apply plugin: 'android-apt'
 
 android {
     compileSdkVersion       rootProject.ext.android.compileSdkVersion
@@ -29,7 +29,7 @@ dependencies {
     compile rootProject.ext.dependencies["constraint-layout"]
     testCompile rootProject.ext.dependencies["junit"]
     compile rootProject.ext.dependencies["butterknife"]
-    apt rootProject.ext.dependencies["butterknife-compiler"]
+    compile rootProject.ext.dependencies["butterknife-compiler"]
     compile rootProject.ext.dependencies["glide"]
     //图像转换：方法，颜色，模糊度等
     compile rootProject.ext.dependencies["glide-transformations"]

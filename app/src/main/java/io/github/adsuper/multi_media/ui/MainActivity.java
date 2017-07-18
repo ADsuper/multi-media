@@ -84,6 +84,7 @@ public class MainActivity extends AppCompatActivity implements
                 getSupportFragmentManager(),getApplicationContext(),mList);
         viewpagerMain.setAdapter(mMainViewPagerAdapter);
         viewpagerMain.addOnPageChangeListener(new MyOnPageChangeListener());
+//        viewpagerMain.setCurrentItem(0);
     }
 
     /**

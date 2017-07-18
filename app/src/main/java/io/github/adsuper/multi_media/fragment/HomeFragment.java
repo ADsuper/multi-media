@@ -13,6 +13,9 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import io.github.adsuper.multi_media.R;
 import io.github.adsuper.multi_media.adapter.HomeFragmentViewPagerAdapter;
 import io.github.adsuper.multi_media.common.Constant;
@@ -25,14 +28,14 @@ import io.github.adsuper.multi_media.ui.MainActivity;
  */
 
 public class HomeFragment extends Fragment {
-//    @BindView(R.id.tablayout)
+    @BindView(R.id.tablayout)
     TabLayout tablayout;
-//    @BindView(R.id.viewpager_homefragment)
+    @BindView(R.id.viewpager_homefragment)
     ViewPager viewpagerHomefragment;
 
-//    Unbinder unbinder;
+    Unbinder unbinder;
     //填充的布局
-    private View inflate;
+    private View rootView;
     //HomeFragment 的 宿主 activity
     private MainActivity mainActivity;
     //viewpager 数据源
@@ -49,30 +52,20 @@ public class HomeFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
-        if (inflater == null) {
-            inflate = inflater.inflate(R.layout.fragment_home, container, false);
+        if (rootView == null) {
+            rootView = inflater.inflate(R.layout.fragment_home, container, false);
         }
-//        unbinder = ButterKnife.bind(this, inflate);
-        return inflate;
+
+        unbinder = ButterKnife.bind(this, rootView);
+        return rootView;
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        initView(view);
         setTablayout();
         setViewpagerData();
         setViewpagerAdapter();
-    }
-
-    /**
-     * 初始化 view
-     * @param view
-     */
-    private void initView(View view) {
-        tablayout = (TabLayout) view.findViewById(R.id.tablayout);
-        viewpagerHomefragment = (ViewPager) view.findViewById(R.id.viewpager_homefragment);
     }
 
     /**
@@ -93,7 +86,7 @@ public class HomeFragment extends Fragment {
     private void setViewpagerData() {
         mListFragments = new ArrayList<>();
         mListFragments.add(new HomeTab1Fragment());
-        mListFragments.add(new HomeTab1Fragment());
+        mListFragments.add(new HomeTab2Fragment());
         mListFragments.add(new HomeTab3Fragment());
     }
 
@@ -109,6 +102,6 @@ public class HomeFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-//        unbinder.unbind();
+        unbinder.unbind();
     }
 }

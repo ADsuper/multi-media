@@ -21,7 +21,7 @@ public class HomeTab1Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         TextView textView = new TextView(getActivity());
-        textView.setText("HomeTab1Fragment");
+        textView.setText("HomeTab1Fragment11111111111111111111111111");
         return textView;
     }
 }
