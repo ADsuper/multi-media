@@ -149,6 +149,14 @@ public class ReadFragment extends Fragment {
         //设置下拉刷新事件
         mSwipeRefreshLayout.setOnRefreshListener(new MySwipeRefreshLayout());
         //添加上拉加载更多
+//        mFragmentRecyclerview.addOnScrollListener(new MyRecyclerViewOnScrollListener(mList,mSwipeRefreshLayout) {
+//            @Override
+//            public void loadMoreDate() {
+//                //TODO 上拉加载更多逻辑
+//                startLoadingMore();
+//                getDataFromServer(Constant.GET_DATA_TYPE_LOADMORE);
+//            }
+//        });
         mFragmentRecyclerview.addOnScrollListener(new RecyclerViewScrollListener());
     }
 
@@ -264,9 +272,8 @@ public class ReadFragment extends Fragment {
                     }
                 });
     }
-
     /**
-     * RecyclerView 滑动监听器，实现上拉加载更多
+     * RecyclerView 滑动监听器
      */
     class RecyclerViewScrollListener extends RecyclerView.OnScrollListener {
         @Override

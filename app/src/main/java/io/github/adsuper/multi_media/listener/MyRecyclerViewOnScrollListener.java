@@ -6,7 +6,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import io.github.adsuper.multi_media.model.ReadModel;
@@ -20,7 +19,7 @@ import io.github.adsuper.multi_media.model.ReadModel;
 
 public abstract class MyRecyclerViewOnScrollListener extends RecyclerView.OnScrollListener {
 
-    private List<ReadModel.NewslistEntity> mList = new ArrayList<>();
+    private List<ReadModel.NewslistEntity> mList;
     private SwipeRefreshLayout mRefreshLayout;
 
     public MyRecyclerViewOnScrollListener(List<ReadModel.NewslistEntity> list, SwipeRefreshLayout refreshLayout) {
