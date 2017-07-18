@@ -35,4 +35,18 @@ dependencies {
     compile rootProject.ext.dependencies["glide-transformations"]
     // 5.0 design 包下新控件
     compile rootProject.ext.dependencies["design"]
+    //进度动画的集合框架
+    compile rootProject.ext.dependencies["avi"]
+    //动画环形弹出菜单
+    compile rootProject.ext.dependencies["fab"]
+    //相关工具类
+    compile rootProject.ext.dependencies["utilcode"]
+    compile rootProject.ext.dependencies["cardview"]
+    //网络请求相关
+    compile rootProject.ext.dependencies["rxjava"]
+    compile rootProject.ext.dependencies["rxandroid"]
+    compile rootProject.ext.dependencies["retrofit"]
+    compile rootProject.ext.dependencies["rxjava2"]
+    compile rootProject.ext.dependencies["converter-gson"]
+
 }
