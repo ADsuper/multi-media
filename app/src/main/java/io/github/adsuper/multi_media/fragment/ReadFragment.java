@@ -2,6 +2,7 @@ package io.github.adsuper.multi_media.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -36,6 +37,7 @@ import io.github.adsuper.multi_media.model.ReadModel;
 import io.github.adsuper.multi_media.net.Httpmanager;
 import io.github.adsuper.multi_media.ui.MainActivity;
 import io.github.adsuper.multi_media.widget.EmptyRecyclerView;
+import io.github.adsuper.multi_media.widget.MyItemDecoration;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -82,6 +84,7 @@ public class ReadFragment extends Fragment {
     private List<ReadModel.NewslistEntity> mList = new ArrayList<>();
     //适配器
     private ReadFragmentAdapter mReadFragmentAdapter;
+    private Observer<ReadModel> mObserver;
 
     @Override
     public void onAttach(Context context) {
@@ -133,10 +136,13 @@ public class ReadFragment extends Fragment {
      * 初始化 recyclerview 的适配器
      */
     private void initAdapter(View view) {
-
+        //设置分割线
+        mFragmentRecyclerview.addItemDecoration(new MyItemDecoration(getActivity(),LinearLayoutManager.VERTICAL));
+        //设置布局样式
         mFragmentRecyclerview.setLayoutManager(new LinearLayoutManager(mMainActivity, LinearLayoutManager.VERTICAL, false));
         mReadFragmentAdapter = new ReadFragmentAdapter(mMainActivity, mList, Constant.ITEM_TYPE_TEXT);
         mFragmentRecyclerview.setAdapter(mReadFragmentAdapter);
+        //根据数据源来判断是否显示空白 view
         mFragmentRecyclerview.setmEmptyView(view.findViewById(R.id.empty_view));
     }
 
@@ -148,15 +154,7 @@ public class ReadFragment extends Fragment {
         mSwipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
         //设置下拉刷新事件
         mSwipeRefreshLayout.setOnRefreshListener(new MySwipeRefreshLayout());
-        //添加上拉加载更多
-//        mFragmentRecyclerview.addOnScrollListener(new MyRecyclerViewOnScrollListener(mList,mSwipeRefreshLayout) {
-//            @Override
-//            public void loadMoreDate() {
-//                //TODO 上拉加载更多逻辑
-//                startLoadingMore();
-//                getDataFromServer(Constant.GET_DATA_TYPE_LOADMORE);
-//            }
-//        });
+        //设置上拉加载更多
         mFragmentRecyclerview.addOnScrollListener(new RecyclerViewScrollListener());
     }
 
@@ -224,56 +222,69 @@ public class ReadFragment extends Fragment {
     }
     private Disposable mDisposable;
 
+    /**
+     * 从网络获取数据
+     * @param type
+     */
     public void getDataFromServer(final int type) {
         Httpmanager.getInstance()
                 .getApiService(Constant.BASE_URL_READ)
                 .getReadData(Constant.APIKEY, Constant.PAGE_SIZE, 2)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<ReadModel>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
-                        mDisposable = d;
-                    }
-
-                    @Override
-                    public void onNext(ReadModel value) {
-                        if (value.getCode() != 200) {
-                            //服务端请求数据发生错误
-                            ToastUtils.showShortSafe("服务端异常，请稍后再试");
-                            return;
-                        }
-                        //更新界面数据
-                        if (Constant.GET_DATA_TYPE_NOMAL == type) {
-                            //正常模式下，清空之前数据，重新加载
-                            mList.clear();
-                            mList = value.getNewslist();
-                        } else {
-                            //加载更多模式
-                            mList.addAll(value.getNewslist());
-                        }
-
-                        mReadFragmentAdapter.setmListData(mList);
-                        mReadFragmentAdapter.notifyDataSetChanged();
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        stopRefreshing();
-                        stopLoading();
-                        stopLoadingMore();
-                    }
-
-                    @Override
-                    public void onComplete() {
-                        stopRefreshing();
-                        stopLoading();
-                        stopLoadingMore();
-                    }
-                });
+                .subscribe(getObserver(type));
     }
+
+    @NonNull
+    private Observer<ReadModel> getObserver(final int type) {
+
+        mObserver = new Observer<ReadModel>() {
+           @Override
+           public void onSubscribe(Disposable d) {
+               //此方法在主线程调用，可以做一些准备工作，比如显示一个loading框
+               mDisposable = d;
+           }
+
+           @Override
+           public void onNext(ReadModel value) {
+               if (value.getCode() != 200) {
+                   //服务端请求数据发生错误
+                   ToastUtils.showShortSafe("服务端异常，请稍后再试");
+                   return;
+               }
+               //更新界面数据
+               if (Constant.GET_DATA_TYPE_NOMAL == type) {
+                   //正常模式下，清空之前数据，重新加载
+                   mList.clear();
+                   mList = value.getNewslist();
+               } else {
+                   //加载更多模式
+                   mList.addAll(value.getNewslist());
+               }
+
+               mReadFragmentAdapter.setmListData(mList);
+               mReadFragmentAdapter.notifyDataSetChanged();
+           }
+
+           @Override
+           public void onError(Throwable e) {
+               stopRefreshing();
+               stopLoading();
+               stopLoadingMore();
+           }
+
+           @Override
+           public void onComplete() {
+               stopRefreshing();
+               stopLoading();
+               stopLoadingMore();
+           }
+       };
+        return mObserver;
+    }
+
     /**
-     * RecyclerView 滑动监听器
+     * RecyclerView 滑动监听器，实现上拉加载更多
      */
     class RecyclerViewScrollListener extends RecyclerView.OnScrollListener {
         @Override
@@ -315,10 +326,10 @@ public class ReadFragment extends Fragment {
     }
 
     private int findMax(int[] lastPositions) {
-        int max = lastPositions[0];
-        for (int value : lastPositions) {
-            if (value > max) {
-                max = value;
+                    int max = lastPositions[0];
+                    for (int value : lastPositions) {
+                        if (value > max) {
+                            max = value;
             }
         }
         return max;

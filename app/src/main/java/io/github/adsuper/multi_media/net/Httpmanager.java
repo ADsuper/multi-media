@@ -20,7 +20,7 @@ public class Httpmanager {
     private Httpmanager() {
     }
 
-    public static Httpmanager getInstance() {
+    public synchronized static Httpmanager getInstance() {
         if (httpManager == null) {
             httpManager = new Httpmanager();
         }

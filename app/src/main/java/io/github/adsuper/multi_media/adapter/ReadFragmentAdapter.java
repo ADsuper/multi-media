@@ -22,7 +22,7 @@ import io.github.adsuper.multi_media.model.ReadModel;
 /**
  * 作者：luoshen/rsf411613593@gmail.com
  * 时间：2017年07月18日
- * 说明：ReadFragment RecycleView 对应的 adapter
+ * 说明：ReadFragment 中 RecycleView 对应的 adapter
  */
 
 public class ReadFragmentAdapter extends RecyclerView.Adapter<ReadFragmentAdapter.ViewHolder> {
@@ -31,9 +31,17 @@ public class ReadFragmentAdapter extends RecyclerView.Adapter<ReadFragmentAdapte
     private int mItemType;//条目布局类型
     private OnBaseClickListener mBaseClickListener;
 
+    /**
+     * 自定义点击事件回调接口
+     */
     public interface OnBaseClickListener {
+        /**
+         * 整个条目的点击事件
+         */
         void onClick(int position, ReadModel.NewslistEntity entity);
-
+        /**
+         * 图片缩略图点击事件
+         */
         void onCoverClick(int position, ReadModel.NewslistEntity entity);
     }
 
@@ -108,7 +116,7 @@ public class ReadFragmentAdapter extends RecyclerView.Adapter<ReadFragmentAdapte
         TextView tvTitle;
         TextView tvAuthor;
         TextView tvTime;
-        ImageView ivCover;//封面缩率图
+        ImageView ivCover;
         ImageView ivGirl;
 
         public ViewHolder(View itemView) {

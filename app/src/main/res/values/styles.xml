@@ -6,6 +6,8 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <!--android:listDivider 是为了设置 recyclerview 的分割线的颜色高度等信息-->
+        <item name="android:listDivider">@drawable/shape_line</item>
     </style>
 
     <style name="GuideTheme" parent="AppTheme">

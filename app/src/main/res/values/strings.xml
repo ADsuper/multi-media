@@ -11,6 +11,10 @@
     <string name="drawer_menu_4">休息视频</string>
     <string name="drawer_menu_5">拓展资源</string>
     <string name="drawer_menu_6">主题切换</string>
+    <string name="editlayout_nickname">请输入昵称</string>
+    <string name="editlayout_blog">请输入博客地址</string>
+    <string name="editlayout_other">请输入其他地址</string>
+    <string name="btn_save">保存</string>
 
 
 </resources>
