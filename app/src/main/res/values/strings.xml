@@ -15,6 +15,8 @@
     <string name="editlayout_blog">请输入博客地址</string>
     <string name="editlayout_other">请输入其他地址</string>
     <string name="btn_save">保存</string>
+    <string name="tv_search">搜索</string>
+    <string name="tv_hotsearch">热门搜索</string>
 
 
 </resources>

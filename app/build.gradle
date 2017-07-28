@@ -52,5 +52,7 @@ dependencies {
     compile rootProject.ext.dependencies["rxjava"]
     compile rootProject.ext.dependencies["rxandroid"]
     compile rootProject.ext.dependencies["rxjava2"]
+    //flexbox 流式布局
+    compile rootProject.ext.dependencies["flexbox"]
 
 }
