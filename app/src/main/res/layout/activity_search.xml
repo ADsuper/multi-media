@@ -55,6 +55,7 @@
     </RelativeLayout>
 
     <TextView
+        android:id="@+id/tv_hotsearch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
@@ -146,7 +147,7 @@
         </LinearLayout>
 
 
-        <com.leon.lgank.widget.EmptyRecyclerView
+        <io.github.adsuper.multi_media.widget.EmptyRecyclerView
             android:id="@+id/recyclerview_history"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
