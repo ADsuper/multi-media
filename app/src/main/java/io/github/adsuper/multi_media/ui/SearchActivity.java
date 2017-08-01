@@ -3,6 +3,7 @@ package io.github.adsuper.multi_media.ui;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -20,6 +21,7 @@ import android.widget.TextView;
 import com.blankj.utilcode.util.StringUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.google.android.flexbox.FlexboxLayout;
+import com.jude.swipbackhelper.SwipeBackHelper;
 import com.wang.avi.AVLoadingIndicatorView;
 
 import java.util.ArrayList;
@@ -89,12 +91,17 @@ public class SearchActivity extends AppCompatActivity {
     protected List<GankModel.ResultsEntity> mSearchResultList = new ArrayList<>();
     private HomeRecyclerviewAdapter mHomeRecyclerviewAdapter;
 
+    private boolean mIsLoadMore = true;//是否可以加载更多
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+        SwipeBackHelper.onCreate(this);//activity 滑动关闭库 SwipeBackHelper
+
         ButterKnife.bind(this);
         mContext = this;
+
 
         initSP();
         initHistorySearch();
@@ -102,6 +109,18 @@ public class SearchActivity extends AppCompatActivity {
         initHistorySearchAdapter();
         stopLoading();
         initListener();
+    }
+
+    @Override
+    protected void onPostCreate(@Nullable Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        SwipeBackHelper.onPostCreate(this);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        SwipeBackHelper.onDestroy(this);
     }
 
     /**
@@ -310,6 +329,11 @@ public class SearchActivity extends AppCompatActivity {
                 //如果相等则说明已经滑动到最后了
                 if (lastPosition == recyclerView.getLayoutManager().getItemCount() - 1) {
                     //此时需要请求等过数据，显示加载更多界面
+                    if (!mIsLoadMore) {
+                        ToastUtils.showShortSafe("木有更多数据了...");
+                        return;
+                    }
+
                     startLoadingMore();
                     getDataFromServer(mKeywords, Constant.GET_DATA_TYPE_LOADMORE);
                 }
@@ -357,6 +381,11 @@ public class SearchActivity extends AppCompatActivity {
                             //加载更多模式
                             mSearchResultList.addAll(value.getResults());
                         }
+                        //如果获取的数据不足一页，代表当前已经没有更过数据，关闭加载更多
+                        if (value.getResults().size() < Constant.PAGE_SIZE) {
+                            mIsLoadMore = false;
+                        }
+
                         if (mRecyclerviewHistory.getAdapter() instanceof HistorySearchAdapter) {
                             mRecyclerviewHistory.setAdapter(mHomeRecyclerviewAdapter);
                         }

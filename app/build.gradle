@@ -54,6 +54,8 @@ dependencies {
     compile rootProject.ext.dependencies["rxjava2"]
     //flexbox 流式布局
     compile rootProject.ext.dependencies["flexbox"]
+    compile rootProject.ext.dependencies["constraint-layout"]
+    //activity 滑动动画库
+    compile rootProject.ext.dependencies["swipebackhelper"]
 
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
 }

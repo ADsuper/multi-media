@@ -6,8 +6,14 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+
         <!--android:listDivider 是为了设置 recyclerview 的分割线的颜色高度等信息-->
-        <item name="android:listDivider">@drawable/shape_line</item>
+        <!--<item name="android:listDivider">@drawable/shape_line</item>-->
+
+        <!--&lt;!&ndash; 溢出菜单图标颜色&ndash;&gt;-->
+        <!--<item name="colorControlNormal">@android:color/white</item>-->
+        <item name="android:windowIsTranslucent">false</item>//就是关掉这个Activity的透明背景
+
     </style>
 
     <style name="GuideTheme" parent="AppTheme">
@@ -20,6 +26,16 @@
     <style name="floatactionbutton_style">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
+    </style>
+
+
+    <style name="SwipeBackHelper_theme" parent="AppTheme">
+
+        //背景透明，不设滑动关闭时背景就是黑的。
+        <item name="android:windowIsTranslucent">true</item>
+        //Activity右滑进出的动画，觉得这个不好看随便换成自己的
+        <item name="android:windowAnimationStyle">@style/SlideRightAnimation</item>
+
     </style>
 
 </resources>
