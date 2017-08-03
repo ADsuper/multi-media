@@ -201,6 +201,23 @@ public class SearchActivity extends AppCompatActivity {
                 //layoutParams.setFlexBasisPercent(0.5f);
                 layoutParams.setMargins(10, 10, 20, 10);
             }
+
+            textView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    TextView tv = (TextView) v;
+                    //放入历史搜索记录
+                    mHistorySearchList.add(tv.getText().toString().trim());
+                    mPreference.putAll(HISTORY_SEARCH, mHistorySearchList);
+                    //得到搜索条件，首先屏蔽掉历史搜索和热门搜索
+                    showSearchResult(true);
+                    //发起服务请求
+                    mKeywords = tv.getText().toString().trim();
+                    startLoading();
+                    mEtSearch.setText(mKeywords);
+                    getDataFromServer(mKeywords, Constant.GET_DATA_TYPE_NOMAL);
+                }
+            });
         }
 
     }

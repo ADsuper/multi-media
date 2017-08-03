@@ -58,4 +58,5 @@ dependencies {
     //activity 滑动动画库
     compile rootProject.ext.dependencies["swipebackhelper"]
 
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
 }
