@@ -31,8 +31,8 @@ public abstract class BaseActivity extends AppCompatActivity {
         setContentView(R.layout.activity_base);
         ButterKnife.bind(this);
         SwipeBackHelper.onCreate(this);
-        initToolbar();
         initContentView();
+        initToolbar();
         Intent intent = getIntent();
         initOperation(intent);
     }
@@ -47,14 +47,19 @@ public abstract class BaseActivity extends AppCompatActivity {
      * 将子类布局添加至父类中
      */
     private void initContentView() {
-        mRootLayout.addView(addChildContentView());
+        View view = addChildContentView(mRootLayout);
+        if (view == null) {
+            return;
+        }
+        mRootLayout.addView(view);
     }
 
     /**
      * 添加子类布局
      * @return
+     * @param rootLayout
      */
-    protected abstract View addChildContentView() ;
+    protected abstract View addChildContentView(LinearLayout rootLayout) ;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -77,6 +82,23 @@ public abstract class BaseActivity extends AppCompatActivity {
     private void initToolbar() {
         mToolbar.setTitle(setToolbarTitle());
         setSupportActionBar(mToolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);//左侧添加一个默认的返回图标
+        getSupportActionBar().setHomeButtonEnabled(true); //设置返回键可用
+
+
+        /**
+         * 默认的返回图标按钮是黑色的 需要在 Style 中添加这么一条属性来改变颜色
+         * <!-- 溢出菜单图标颜色-->，更改 返回按钮的 颜色
+         <item name="colorControlNormal">@android:color/white</item>
+         *
+         *
+         */
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     /**

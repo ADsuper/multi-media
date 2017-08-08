@@ -30,7 +30,6 @@ dependencies {
     testCompile rootProject.ext.dependencies["junit"]
     compile rootProject.ext.dependencies["butterknife"]
     compile rootProject.ext.dependencies["butterknife-compiler"]
-
     compile rootProject.ext.dependencies["cardview"]
     compile rootProject.ext.dependencies["recyclerview"]
     //图片加载框架 glide
@@ -57,6 +56,8 @@ dependencies {
     compile rootProject.ext.dependencies["constraint-layout"]
     //activity 滑动动画库
     compile rootProject.ext.dependencies["swipebackhelper"]
-
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile files('libs/Android-1.3.0.jar')
+    compile 'com.just.agentweb:agentweb:1.2.6'
+
 }

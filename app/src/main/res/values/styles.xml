@@ -7,11 +7,13 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
 
-        <!--android:listDivider 是为了设置 recyclerview 的分割线的颜色高度等信息-->
-        <!--<item name="android:listDivider">@drawable/shape_line</item>-->
+        <!-- 溢出菜单图标颜色,设置 toolbar 的左侧和右侧图标的颜色-->
+        <item name="colorControlNormal">@android:color/white</item>
 
-        <!--&lt;!&ndash; 溢出菜单图标颜色&ndash;&gt;-->
-        <!--<item name="colorControlNormal">@android:color/white</item>-->
+        <!--android:listDivider 是为了设置 recyclerview 的分割线的颜色高度等信息-->
+        <item name="android:listDivider">@drawable/shape_line</item>
+
+
         <item name="android:windowIsTranslucent">false</item>//就是关掉这个Activity的透明背景
 
     </style>

@@ -1,6 +1,7 @@
 package io.github.adsuper.multi_media.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -36,6 +37,7 @@ import io.github.adsuper.multi_media.common.Constant;
 import io.github.adsuper.multi_media.model.ReadModel;
 import io.github.adsuper.multi_media.net.Httpmanager;
 import io.github.adsuper.multi_media.ui.MainActivity;
+import io.github.adsuper.multi_media.ui.ReadDetailActivity;
 import io.github.adsuper.multi_media.widget.EmptyRecyclerView;
 import io.github.adsuper.multi_media.widget.MyItemDecoration;
 import io.reactivex.Observer;
@@ -124,7 +126,9 @@ public class ReadFragment extends Fragment {
        mReadFragmentAdapter.addOnClickListener(new ReadFragmentAdapter.OnBaseClickListener() {
            @Override
            public void onClick(int position, ReadModel.NewslistEntity entity) {
-
+               Intent intent = new Intent(mMainActivity, ReadDetailActivity.class);
+               intent.putExtra("entity", entity);
+               startActivity(intent);
            }
 
            @Override

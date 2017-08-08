@@ -35,13 +35,17 @@
             android:name=".ui.SearchActivity"
             android:theme="@style/SwipeBackHelper_theme">
         </activity>
-        <activity android:name=".ui.EditActivity">
+        <activity
+            android:name=".ui.EditActivity"
+            android:theme="@style/SwipeBackHelper_theme">
         </activity>
         <activity android:name=".ui.PicActivity">
         </activity>
         <activity android:name=".ui.DetailActivity">
         </activity>
         <activity android:name=".ui.BaseActivity">
+        </activity>
+        <activity android:name=".ui.ReadDetailActivity">
         </activity>
     </application>
 
