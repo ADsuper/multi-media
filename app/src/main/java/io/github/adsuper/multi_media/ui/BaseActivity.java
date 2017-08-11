@@ -85,20 +85,26 @@ public abstract class BaseActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);//左侧添加一个默认的返回图标
         getSupportActionBar().setHomeButtonEnabled(true); //设置返回键可用
 
-
-        /**
-         * 默认的返回图标按钮是黑色的 需要在 Style 中添加这么一条属性来改变颜色
-         * <!-- 溢出菜单图标颜色-->，更改 返回按钮的 颜色
-         <item name="colorControlNormal">@android:color/white</item>
-         *
-         *
-         */
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
+    }
+
+    /**
+     * 打开系统自带的分享界面
+     *
+     * @param type
+     */
+    public void startShareIntent(String type, String content) {
+        Intent share_intent = new Intent();
+        share_intent.setAction(Intent.ACTION_SEND);
+        share_intent.setType(type);
+        share_intent.putExtra(Intent.EXTRA_TEXT, content);
+        share_intent = Intent.createChooser(share_intent, "分享");
+        startActivity(share_intent);
     }
 
     /**

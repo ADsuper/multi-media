@@ -2,6 +2,8 @@ package io.github.adsuper.multi_media.ui;
 
 import android.content.Intent;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.LinearLayout;
@@ -12,6 +14,7 @@ import com.just.library.AgentWeb;
 import com.just.library.ChromeClientCallbackManager;
 import com.just.library.LogUtils;
 
+import io.github.adsuper.multi_media.R;
 import io.github.adsuper.multi_media.model.ReadModel;
 
 /**
@@ -40,6 +43,13 @@ public class ReadDetailActivity extends BaseActivity {
             return;
         }
 
+        initWebView();
+    }
+
+    /**
+     * 配置 AgentWeb 参数
+     */
+    private void initWebView() {
         mAgentWeb = AgentWeb.with(this)//传入Activity
                 .setAgentWebParent(mLinearLayout, new LinearLayout.LayoutParams(-1, -1))//传入AgentWeb 的父控件 ，如果父控件为 RelativeLayout ， 那么第二参数需要传入 RelativeLayout.LayoutParams ,第一个参数和第二个参数应该对应。
                 .useDefaultIndicator()// 使用默认进度条
@@ -64,6 +74,27 @@ public class ReadDetailActivity extends BaseActivity {
         mLinearLayout = rootLayout;
 //        mView = View.inflate(this, R.layout.activity_read_detail, null);
         return null;
+    }
+
+    @Override
+    protected void updateOptionsMenu(Menu menu) {
+        //隐藏掉 下载 和 保存标题
+        menu.findItem(R.id.action_download).setVisible(false);
+        menu.findItem(R.id.action_save).setVisible(false);
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.action_share:
+
+                startShareIntent("text/plain", "分享一篇实用文章：" + mUrl);
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

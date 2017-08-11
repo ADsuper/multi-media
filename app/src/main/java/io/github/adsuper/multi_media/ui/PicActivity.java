@@ -1,15 +1,35 @@
 package io.github.adsuper.multi_media.ui;
 
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.content.Intent;
+import android.view.Menu;
+import android.view.View;
+import android.widget.LinearLayout;
 
 import io.github.adsuper.multi_media.R;
 
-public class PicActivity extends AppCompatActivity {
+public class PicActivity extends BaseActivity {
+
+
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pic);
+    protected void initOperation(Intent intent) {
+
+    }
+
+    @Override
+    protected View addChildContentView(LinearLayout rootLayout) {
+        return null;
+    }
+
+    @Override
+    protected String setToolbarTitle() {
+
+        return "";
+    }
+
+    @Override
+    protected void updateOptionsMenu(Menu menu) {
+
+        menu.findItem(R.id.action_save).setVisible(false);
     }
 }
