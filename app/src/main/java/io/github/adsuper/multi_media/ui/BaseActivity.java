@@ -31,10 +31,20 @@ public abstract class BaseActivity extends AppCompatActivity {
         setContentView(R.layout.activity_base);
         ButterKnife.bind(this);
         SwipeBackHelper.onCreate(this);
+        SwipeBackHelper.getCurrentPage(this).setSwipeBackEnable(stopSwipe());
         initContentView();
         initToolbar();
         Intent intent = getIntent();
         initOperation(intent);
+    }
+
+    /**
+     * 默认支持滑动退出 Activity
+     * @return
+     */
+    protected boolean stopSwipe() {
+
+        return true;
     }
 
     /**

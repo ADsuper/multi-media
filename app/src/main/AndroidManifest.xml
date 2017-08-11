@@ -39,7 +39,8 @@
             android:name=".ui.EditActivity"
             android:theme="@style/SwipeBackHelper_theme">
         </activity>
-        <activity android:name=".ui.PicActivity">
+        <activity android:name=".ui.PicActivity"
+            android:theme="@style/picActivity_theme">
         </activity>
         <activity android:name=".ui.DetailActivity">
         </activity>

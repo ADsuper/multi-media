@@ -37,6 +37,7 @@ import io.github.adsuper.multi_media.common.Constant;
 import io.github.adsuper.multi_media.model.ReadModel;
 import io.github.adsuper.multi_media.net.Httpmanager;
 import io.github.adsuper.multi_media.ui.MainActivity;
+import io.github.adsuper.multi_media.ui.PicActivity;
 import io.github.adsuper.multi_media.ui.ReadDetailActivity;
 import io.github.adsuper.multi_media.widget.EmptyRecyclerView;
 import io.github.adsuper.multi_media.widget.MyItemDecoration;
@@ -134,6 +135,11 @@ public class ReadFragment extends Fragment {
            @Override
            public void onCoverClick(int position, ReadModel.NewslistEntity entity) {
 
+               Intent intent = new Intent(mMainActivity, PicActivity.class);
+               ArrayList<String> listPicUrl = new ArrayList<String>();
+               listPicUrl.add(entity.getPicUrl());
+               intent.putStringArrayListExtra("piclist",listPicUrl);
+               startActivity(intent);
            }
        });
     }
